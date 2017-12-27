@@ -1,0 +1,6 @@
+framework module Tokenizer {
+  umbrella header "Tokenizer-umbrella.h"
+
+  export *
+  module * { export * }
+}
