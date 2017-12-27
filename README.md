@@ -22,6 +22,10 @@
 
 `Tokenizer` is a tiny human language tokenizer framework in Swift..
 
+## Preview
+
+![Preview](https://i.loli.net/2017/12/27/5a434ea59f2bc.jpg)
+
 ## Installation
 
 #### CocoaPods
