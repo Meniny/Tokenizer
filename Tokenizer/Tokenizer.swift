@@ -20,9 +20,9 @@ open class Tokenizer {
         public static let none = TokenizeOption(rawValue: 0)
         public static let deduplication = TokenizeOption(rawValue: 1 << 0)
         public static let keepSymbols = TokenizeOption(rawValue: 1 << 1)
-        //    static let keepEnglish = TokenizeOption(rawValue: 1 << 2)
+        public static let keepWhiteSapce = TokenizeOption(rawValue: 1 << 2)
         
-        public static let `default` = TokenizeOption.keepSymbols
+        public static let `default`: TokenizeOption = [TokenizeOption.keepSymbols, TokenizeOption.keepWhiteSapce]
     }
     
     public static let `default` = Tokenizer.init()
@@ -34,6 +34,7 @@ open class Tokenizer {
         
         let deduplication = options.contains(.deduplication)
         let keepSymbols = options.contains(.keepSymbols)
+        let keepWhiteSapce = options.contains(.keepWhiteSapce)
         let flags: CFOptionFlags = keepSymbols ? kCFStringTokenizerUnitWordBoundary : kCFStringTokenizerUnitWord
         let currentRef = CFLocaleCopyCurrent()
         
@@ -45,7 +46,8 @@ open class Tokenizer {
         
         while range.length > 0 {
             let wordRange = sentence.index(sentence.startIndex, offsetBy: range.location)..<sentence.index(sentence.startIndex, offsetBy: range.location + range.length)
-            let word = String(sentence[wordRange]).trimmingCharacters(in: .whitespacesAndNewlines)
+            let trimming: CharacterSet = keepWhiteSapce ? .newlines : .whitespacesAndNewlines
+            let word = String(sentence[wordRange]).trimmingCharacters(in: trimming)
             
             if !word.isEmpty {
                 if deduplication {

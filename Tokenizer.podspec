@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Tokenizer"
-  s.version          = "1.0.0"
+  s.version          = "1.1.0"
   s.summary          = "A tiny human language tokenizer framework in Swift."
   s.description      = <<-DESC
                         Tokenizer is a tiny human language tokenizer framework in Swift..
