@@ -38,7 +38,7 @@ open class Tokenizer {
         let flags: CFOptionFlags = keepSymbols ? kCFStringTokenizerUnitWordBoundary : kCFStringTokenizerUnitWord
         let currentRef = CFLocaleCopyCurrent()
         
-        let tokenizerRef = CFStringTokenizerCreate(kCFAllocatorDefault, sentence as CFString!, CFRangeMake(0, sentence.count), flags, currentRef)
+        let tokenizerRef = CFStringTokenizerCreate(kCFAllocatorDefault, sentence as CFString?, CFRangeMake(0, sentence.count), flags, currentRef)
         CFStringTokenizerAdvanceToNextToken(tokenizerRef)
         var range = CFStringTokenizerGetCurrentTokenRange(tokenizerRef)
         
@@ -71,11 +71,11 @@ open class Tokenizer {
 }
 
 public extension String {
-    public func tokenize(options: Tokenizer.TokenizeOption = .default) -> [String] {
+    func tokenize(options: Tokenizer.TokenizeOption = .default) -> [String] {
         return Tokenizer.default.tokenize(text: self, options: options)
     }
     
-    public static func tokenize(string sentence: String, options: Tokenizer.TokenizeOption = .default) -> [String] {
+    static func tokenize(string sentence: String, options: Tokenizer.TokenizeOption = .default) -> [String] {
         return Tokenizer.default.tokenize(text: sentence, options: options)
     }
 }
